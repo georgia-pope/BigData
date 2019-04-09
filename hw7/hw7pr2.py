@@ -82,7 +82,7 @@ def find_grad(X, y, W, reg=0.0):
 	# return grad
 	# Changed my code (Which is above) to match the solution code
 	m = X.shape[0]
-	return X.T @ (X @ W - y) / m
+	return X.T @ (X @ W - y)/ m + reg*np.sign(W)
 
 
 def prox(X, gamma):
@@ -150,7 +150,7 @@ def grad_lasso(
 		W = W - lr*W_grad
 		# W = prox(W, eps)
 		# Changed my code to match the solution code
-		W = prox(W, reg*lr)
+		W = prox(W, lr*reg)
 		cost = find_cost(X[mini_batch], y[mini_batch], W, reg=reg)
 		obj_list.append(cost)
 
